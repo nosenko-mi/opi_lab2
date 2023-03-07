@@ -149,17 +149,7 @@ namespace opi_lab2
         private void GetStatisticsClick(object sender, RoutedEventArgs e)
         {
             FileStatisticsProvider statistics = new FileStatisticsProvider(StringFromRichTextBox(contentTextBox));
-
-            int vowels = statistics.Vowels();
-            int consonants = statistics.Consonants();
-            int digits = statistics.Digits();
-            int special = statistics.SpecialDigits();
-            int punctuation = statistics.Puncuations();
-            int author = statistics.AuthorPages();
-            int latin = statistics.Latin();
-            int cyrillic = statistics.Cyrillic();
-
-            MessageBox.Show($"vowels: {vowels}; consonants: {consonants};\ndigits: {digits}; special: {special}; punctuation: {punctuation}; author: {author};\nLatin: {latin}; Cyrillyc: {cyrillic}");
+            MessageBox.Show(statistics.FullStatistics().ToString(), "Statistics") ;
         }
 
         private void txtEditor_SelectionChanged(object sender, RoutedEventArgs e)

@@ -46,6 +46,17 @@ namespace opi_lab2_test
         }
 
         [TestMethod]
+        public void TestEmptyLines2()
+        {
+            string empty = "";
+            FileStatisticsProvider statistics = new FileStatisticsProvider(empty);
+            int actual = statistics.EmptyLines();
+            int expected = 0;
+            Assert.AreEqual(expected, actual, $"Empty lines amount is not correct: expected {expected} actual {actual}");
+
+        }
+
+        [TestMethod]
         public void TestVowels()
         {
             int actual = statistics.Vowels();

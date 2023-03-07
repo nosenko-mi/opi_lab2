@@ -17,9 +17,23 @@ namespace opi_lab2.utils
             Text = text;
         }
 
-        public void FullStatistics()
+        public FileStatistics FullStatistics()
         {
+            FileStatistics statistics = new FileStatistics(
+                SizeKBytes(),
+                Characters(),
+                Paragraphs(),
+                EmptyLines(),
+                AuthorPages(),
+                Vowels(),
+                Consonants(),
+                Digits(),
+                SpecialDigits(),
+                Puncuations(),
+                Latin(),
+                Cyrillic());
 
+            return statistics;
         }
 
         private void FullStatisticsOptimized()
@@ -27,7 +41,7 @@ namespace opi_lab2.utils
 
         }
 
-        public float SizeKBytes()
+        public int SizeKBytes()
         {
             return Text.Length * sizeof(char) / 1024;
         }
@@ -46,7 +60,14 @@ namespace opi_lab2.utils
 
         public int EmptyLines()
         {
-            return Text.Split('\n').Count(line => string.IsNullOrWhiteSpace(line));
+            if (Text.Length == 0)
+            {
+                return 0;
+            }
+            int lines = Text.Split('\n').Count(line => string.IsNullOrWhiteSpace(line));
+
+            // Text.Split() creates empty element at the end of result array.
+            return lines - 1;
         }
 
         public int AuthorPages()
