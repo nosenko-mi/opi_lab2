@@ -1,0 +1,60 @@
+﻿<Window x:Class="opi_lab2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:opi_lab2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" MinHeight="450" MinWidth="700">
+    <Grid x:Name="mainGridContainer">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--Menu-->
+        <Menu Grid.Row="0" Height="25" VerticalAlignment="Top">
+            <MenuItem Header="File" Height="25">
+                <MenuItem Header="New" Click="CreateFileClick"></MenuItem>
+                <Separator />
+                <MenuItem Header="Save" Click="SaveFileClick"></MenuItem>
+                <MenuItem Header="Save as" Click="SaveFileAsClick"></MenuItem>
+                <Separator />
+                <MenuItem Header="Open" Click="OpenFileClick"></MenuItem>
+                <MenuItem Header="Encoding">
+                    <MenuItem Header="UTF-8" Click="ChangeEncodingToUtf8Click"></MenuItem>
+                    <MenuItem Header="Windows cyrillic" Click="ChangeEncodingToCyrrilicClick"></MenuItem>
+                </MenuItem>
+                <Separator/>
+                <MenuItem Header="Exit" Click="ExitClick"></MenuItem>
+
+            </MenuItem>
+            <MenuItem Header="Edit" >
+                <MenuItem Header="Some stuff..."></MenuItem>
+                <MenuItem Header="Statistics" Click="GetStatisticsClick"></MenuItem>
+
+            </MenuItem>
+        </Menu>
+
+        <!--Content textbox-->
+        <RichTextBox x:Name="contentTextBox" Grid.Row="1" Margin="10" FontSize="20"
+                     SelectionChanged="txtEditor_SelectionChanged" TextChanged="contentTextBoxTextChanged"/>
+
+        <DockPanel Grid.Row="2">
+            <StatusBar DockPanel.Dock="Bottom">
+                <StatusBarItem>
+                    <TextBlock x:Name="cursorPositionLabel"/>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock x:Name="fileSizeLabel"/>
+                </StatusBarItem>
+                <StatusBarItem>
+                    <TextBlock x:Name="textEncodingLabel"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33214.272
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "opi_lab2", "opi_lab2\opi_lab2.csproj", "{BF6C15E0-6375-4DE5-82ED-7D9597737D80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "opi_lab2_test", "opi_lab2_test\opi_lab2_test.csproj", "{B32F278F-223D-4340-8F9D-C14358FE740F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BF6C15E0-6375-4DE5-82ED-7D9597737D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF6C15E0-6375-4DE5-82ED-7D9597737D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF6C15E0-6375-4DE5-82ED-7D9597737D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF6C15E0-6375-4DE5-82ED-7D9597737D80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B32F278F-223D-4340-8F9D-C14358FE740F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B32F278F-223D-4340-8F9D-C14358FE740F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B32F278F-223D-4340-8F9D-C14358FE740F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B32F278F-223D-4340-8F9D-C14358FE740F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5B2A270B-5FDB-4EEB-93DC-3AA2BE0012C8}
+	EndGlobalSection
+EndGlobal
