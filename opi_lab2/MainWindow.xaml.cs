@@ -151,6 +151,23 @@ namespace opi_lab2
             FileStatisticsProvider statistics = new FileStatisticsProvider(StringFromRichTextBox(contentTextBox));
             MessageBox.Show(statistics.FullStatistics().ToString(), "Statistics") ;
         }
+        
+        private void FormatTextClick(object sender, RoutedEventArgs e)
+        {
+            contentTextBox.SetValue(Grid.ColumnSpanProperty, 1);
+            newContentGrid.Visibility = Visibility.Visible;
+            // format text
+            string formattedText = FileFormatter.FormatToPlainText(StringFromRichTextBox(contentTextBox));
+
+            StringToRichTextBox(formattedText, ref newContentTextBox);
+        }
+
+        private void acceptFormatChangesClick(object sender, RoutedEventArgs e)
+        {
+            contentTextBox.SetValue(Grid.ColumnSpanProperty, 2);
+            newContentGrid.Visibility = Visibility.Hidden;
+            // change main text;
+        }
 
         private void txtEditor_SelectionChanged(object sender, RoutedEventArgs e)
         {
@@ -192,5 +209,12 @@ namespace opi_lab2
             // representing the plain text content of the TextRange.
             return textRange.Text;
         }
+
+        private void StringToRichTextBox(string text, ref RichTextBox richTextBox)
+        {
+            richTextBox.Document.Blocks.Clear();
+            richTextBox.Document.Blocks.Add(new Paragraph(new Run(text)));
+        }
+
     }
 }

@@ -56,7 +56,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="utils\EncodingDetector.cs" />
-    <Compile Include="utils\FileController.cs" />
+    <Compile Include="utils\FileFormatter.cs" />
     <Compile Include="utils\FileStatistics.cs" />
     <Compile Include="utils\FileStatisticsProvider.cs" />
     <Page Include="MainWindow.xaml">
