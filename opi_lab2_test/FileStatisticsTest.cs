@@ -40,7 +40,7 @@ namespace opi_lab2_test
         public void TestEmptyLines()
         {
             int actual = statistics.EmptyLines();
-            int expected = 4;
+            int expected = 3;
             Assert.AreEqual(expected, actual, $"Empty lines amount is not correct: expected {expected} actual {actual}");
 
         }

@@ -1,21 +1,16 @@
 ﻿using Microsoft.Win32;
 using opi_lab2.utils;
+using opi_lab2.utils.file;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Linq;
 
 namespace opi_lab2
 {
@@ -36,6 +31,14 @@ namespace opi_lab2
         {
             InitializeComponent();
             RenderStatusBar();
+        }
+
+        public FileStatisticsProvider FileStatisticsProvider
+        {
+            get => default;
+            set
+            {
+            }
         }
 
         private void RenderStatusBar()
@@ -77,7 +80,7 @@ namespace opi_lab2
         {
             string text = new TextRange(contentTextBox.Document.ContentStart, contentTextBox.Document.ContentEnd).Text;
 
-            File.WriteAllText(path, text);
+            File.WriteAllText(path, text, _currentEncoding);
 
             _currentFile = path;
             Title = _currentFile;
@@ -134,7 +137,6 @@ namespace opi_lab2
 
         private void ExitClick(object sender, RoutedEventArgs e)
         {
-            // save file
             if (_isFileChanged)
             {
                 if (MessageBox.Show("Save changes?", "Text is changed", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
@@ -142,7 +144,6 @@ namespace opi_lab2
                     SaveFile();
                 }
             }
-            // exit
             Close();
         }
 
@@ -154,19 +155,72 @@ namespace opi_lab2
         
         private void FormatTextClick(object sender, RoutedEventArgs e)
         {
-            contentTextBox.SetValue(Grid.ColumnSpanProperty, 1);
-            newContentGrid.Visibility = Visibility.Visible;
+            RenderNewContentTextBox();
             // format text
             string formattedText = FileFormatter.FormatToPlainText(StringFromRichTextBox(contentTextBox));
 
             StringToRichTextBox(formattedText, ref newContentTextBox);
         }
 
-        private void acceptFormatChangesClick(object sender, RoutedEventArgs e)
+        private void AcceptFormatChangesClick(object sender, RoutedEventArgs e)
         {
-            contentTextBox.SetValue(Grid.ColumnSpanProperty, 2);
-            newContentGrid.Visibility = Visibility.Hidden;
-            // change main text;
+            HideNewContentTextBox();
+            StringToRichTextBox(StringFromRichTextBox(newContentTextBox), ref contentTextBox);
+            SaveFileAs();
+        }
+
+        private void DeclineFormatChangesClick(object sender, RoutedEventArgs e)
+        {
+            HideNewContentTextBox();
+        }
+
+        private void FindClick(object sender, RoutedEventArgs e)
+        {
+            // render ui
+            RenderFindContentTextBox();
+        }
+
+        private void FindButtonClick(object sender, RoutedEventArgs e)
+        {
+            TextRange textRange = new TextRange(
+                            contentTextBox.Document.ContentStart,
+                            contentTextBox.Document.ContentEnd);
+
+            textRange.ClearAllProperties();
+            string textBoxText = textRange.Text;
+            string searchText = StringFromRichTextBox(newContentTextBox);
+            if (searchText.Contains("\r\n"))
+                searchText = searchText.Replace("\r\n", "");
+
+            if (string.IsNullOrWhiteSpace(textBoxText) || string.IsNullOrWhiteSpace(searchText))
+            {
+                MessageBox.Show("Please provide search text or source text to search from");
+                return;
+            }
+            Dictionary<int, string> lines = FileLookup.FindTextStrictLines(ref contentTextBox, ref newContentTextBox);
+            string asString = "";
+            foreach (KeyValuePair<int, string> kvp in lines)
+            {
+                asString += String.Format("[{0}]: {1}", kvp.Key, kvp.Value);
+            }
+            if (lines.Count > 0)
+            {
+                MessageBox.Show(asString);
+            }
+            else
+            {
+                MessageBox.Show("No Match found");
+            }
+        }
+
+        private void FindComplexNumbersClick(object sender, RoutedEventArgs e)
+        {
+            List<TextRange> ranges = FileLookup.FindComplexNumbers(ref contentTextBox);
+            foreach (TextRange range in ranges)
+            {
+                range.ApplyPropertyValue(TextElement.BackgroundProperty, new SolidColorBrush(Colors.Coral));
+            }
+            MessageBox.Show("Total Match Found : " + ranges.Count);
         }
 
         private void txtEditor_SelectionChanged(object sender, RoutedEventArgs e)
@@ -195,7 +249,6 @@ namespace opi_lab2
         }
 
         // Utility.
-
         private string StringFromRichTextBox(RichTextBox rtb)
         {
             TextRange textRange = new TextRange(
@@ -214,6 +267,28 @@ namespace opi_lab2
         {
             richTextBox.Document.Blocks.Clear();
             richTextBox.Document.Blocks.Add(new Paragraph(new Run(text)));
+        }
+
+        private void RenderNewContentTextBox()
+        {
+            contentTextBox.SetValue(Grid.ColumnSpanProperty, 1);
+            newContentGrid.Visibility = Visibility.Visible;
+            findButton.Visibility = Visibility.Collapsed;
+            acceptButton.Visibility = Visibility.Visible;
+        }
+
+        private void RenderFindContentTextBox()
+        {
+            contentTextBox.SetValue(Grid.ColumnSpanProperty, 1);
+            newContentGrid.Visibility = Visibility.Visible;
+            findButton.Visibility = Visibility.Visible;
+            acceptButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void HideNewContentTextBox()
+        {
+            contentTextBox.SetValue(Grid.ColumnSpanProperty, 2);
+            newContentGrid.Visibility = Visibility.Hidden;
         }
 
     }

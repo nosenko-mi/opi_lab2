@@ -26,6 +26,22 @@ namespace opi_lab2.utils
             this.cyrillic = cyrillic;
         }
 
+        public MainWindow MainWindow
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
+        public file.FileStatisticsProvider FileStatisticsProvider
+        {
+            get => default;
+            set
+            {
+            }
+        }
+
         public override string ToString()
         {
             return $"Size(Kb) = {sizeKb}; Characters = {characters}; Paragraphs = {paragraphs}; Empty lines = {emptyLines}; Autor pages = {authorPages}; Vowels = {vowels}; Consonants = {consonants}; " +

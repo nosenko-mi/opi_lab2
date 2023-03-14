@@ -5,10 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace opi_lab2.utils
+namespace opi_lab2.utils.file
 {
-
-    public class FileStatisticsProvider
+    public class FileStatisticsProvider : IFileStatisticsProvider
     {
         public string Text { get; set; }
 
@@ -36,11 +35,6 @@ namespace opi_lab2.utils
             return statistics;
         }
 
-        private void FullStatisticsOptimized()
-        {
-
-        }
-
         public int SizeKBytes()
         {
             return Text.Length * sizeof(char) / 1024;
@@ -53,7 +47,6 @@ namespace opi_lab2.utils
 
         public int Paragraphs()
         {
-            // https://stackoverflow.com/questions/23987032/how-to-count-the-number-of-paragraphs-in-a-string-in-c-sharp
             string pattern = @"[^\r\n]+((\r|\n|\r\n)[^\r\n]+)*";
             return Regex.Matches(Text, pattern).Count;
         }
@@ -78,8 +71,7 @@ namespace opi_lab2.utils
         public int Vowels()
         {
             int total = 0;
-            //var vowels = new HashSet<char> { 'a', 'e', 'i', 'o', 'u', 'у', 'е', 'а', 'о', 'я', 'и', 'ю', 'і', 'ы'};
-            var vowels = "aeiouyеаояиюіыAEIOUYЕАОЯИЮІ";
+            string vowels = "aeiouyеаояиюіыAEIOUYЕАОЯИЮІ";
             for (int i = 0; i < Text.Length; i++)
             {
                 //if (vowels.Contains(Text[i]))
@@ -101,7 +93,6 @@ namespace opi_lab2.utils
 
             for (int i = 0; i < Text.Length; i++)
             {
-                // invert if 
                 if (consonants.Contains(Text[i]))
                 {
                     total++;
@@ -137,18 +128,3 @@ namespace opi_lab2.utils
 
     }
 }
-
-//переглядати його статистику
-//(розмір у кілобайтах, +
-//кількість символів, +
-//абзаців, +
-//порожніх рядків,
-//авторських сторінок (1 авторська сторінка = 1800 символів), +
-//кількість голосних та приголосних для текстів кирилицею або латиницею , +
-//кількість цифр, +
-//спеціальних символів, +
-//знаків пунктуації, +
-//кириличних та латинських літер), +
-//а також видаляти всі незначні прогалини (зайві прогалини, табуляції та порожні рядки).
-//Результат видалення повинен відображатися поруч із вихідним текстом (двома колонками),
-//користувач повинен сам вирішувати чи зберігати результат обробки тексту.

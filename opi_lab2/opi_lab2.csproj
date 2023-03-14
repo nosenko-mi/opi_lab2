@@ -56,9 +56,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="utils\EncodingDetector.cs" />
-    <Compile Include="utils\FileFormatter.cs" />
-    <Compile Include="utils\FileStatistics.cs" />
-    <Compile Include="utils\FileStatisticsProvider.cs" />
+    <Compile Include="utils\file\FileFormatter.cs" />
+    <Compile Include="utils\file\FileLookup.cs" />
+    <Compile Include="utils\file\FileStatistics.cs" />
+    <Compile Include="utils\file\FileStatisticsProvider.cs" />
+    <Compile Include="utils\file\IFileStatisticsProvider.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,6 +93,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
