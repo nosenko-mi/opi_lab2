@@ -43,6 +43,10 @@
                 <MenuItem Header="Statistics" Click="GetStatisticsClick"></MenuItem>
 
             </MenuItem>
+
+            <MenuItem Header="Web" >
+                <MenuItem Header="Moodle" Click="MoodleFetchClick"></MenuItem>
+            </MenuItem>
         </Menu>
 
         <!--Content textbox-->
@@ -96,12 +100,35 @@
                 Margin="10 5 10 10" FontSize="16"
                 Content="Find"
                 Visibility="Collapsed"
-                Click="FindButtonClick"/>
+                Click="FindButtonClick"
+                />
 
         </Grid>
 
+
         
         <DockPanel Grid.Row="2" Grid.ColumnSpan="2" >
+            
+            <StackPanel x:Name="GetNewsPanel" 
+                        DockPanel.Dock="Top" 
+                        Orientation="Horizontal"
+                        Visibility="Collapsed">
+                
+                <TextBox 
+                    x:Name="newsCountTextBox"
+                    Height="25" Width="100" FontSize="20"
+                    Margin="10 0 20 10"
+                    TextAlignment="Center"
+                    VerticalContentAlignment="Center"
+                    PreviewTextInput="NumberValidationTextBox"/>
+                <Button 
+                    Height="25" Width="56" 
+                    Content="Get" FontSize="16"
+                    Margin="20 0 0 10"
+                    Click="FetchNewsButtonClick"/>
+                
+            </StackPanel>
+
             <StatusBar DockPanel.Dock="Bottom">
                 <StatusBarItem>
                     <Label x:Name="cursorPositionLabel"/>

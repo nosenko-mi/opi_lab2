@@ -3,7 +3,7 @@
   <Class Name="opi_lab2.MainWindow" Collapsed="true" BaseTypeListCollapsed="true">
     <Position X="4" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACQAAAAgAECAAEAACAAAIAAJZQAAwEKABCBhDAiAAIU=</HashCode>
+      <HashCode>ACQAAAAgAECAAEAACAIAIAEJZSAAwEKABKBhDAiAAIU=</HashCode>
       <FileName>MainWindow.xaml.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -12,14 +12,14 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="opi_lab2.utils.FileFormatter">
-    <Position X="2.25" Y="2.5" Width="1.5" />
+    <Position X="10.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>utils\file\FileFormatter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="opi_lab2.utils.file.FileLookup">
-    <Position X="2.25" Y="3.75" Width="1.5" />
+    <Position X="10.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AACAAAAAAAAAAQAAAABAQEAAAgQAAAAAAAABACAQAAA=</HashCode>
       <FileName>utils\file\FileLookup.cs</FileName>
@@ -32,6 +32,17 @@
       <FileName>utils\file\FileStatisticsProvider.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.21" />
+  </Class>
+  <Class Name="opi_lab2.web.MoodleScrapper">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABBAAAAAkAAAAAAAAAAABCAAAAAAAAAA=</HashCode>
+      <FileName>web\MoodleScrapper.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MainWindow" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
   </Class>
   <Struct Name="opi_lab2.utils.FileStatistics">
     <Position X="6.25" Y="3.5" Width="1.5" />
@@ -52,11 +63,36 @@
       <Property Name="FileStatisticsProvider" />
     </ShowAsAssociation>
   </Struct>
+  <Struct Name="opi_lab2.web.MoodleLink">
+    <Position X="2.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAEAAAEAAAAAIAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>web\MoodleLink.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="MainWindow" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Struct>
   <Interface Name="opi_lab2.utils.file.IFileStatisticsProvider">
     <Position X="8.75" Y="1" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>utils\file\IFileStatisticsProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="opi_lab2.web.ILinkScrapper">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>web\ILinkScrapper.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="opi_lab2.web.ILink" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>web\ILink.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

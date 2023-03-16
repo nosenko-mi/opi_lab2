@@ -11,6 +11,9 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Linq;
+using System.Net;
+using opi_lab2.web;
+using System.Windows.Input;
 
 namespace opi_lab2
 {
@@ -239,6 +242,31 @@ namespace opi_lab2
             RenderStatusBar();
         }
 
+        private void MoodleFetchClick(object sender, RoutedEventArgs e)
+        {
+            // Render ui.
+            RenderGetNewsPanel();
+        }
+
+        private void FetchNewsButtonClick(object sender, RoutedEventArgs e)
+        {
+            // Get input.
+            string amountText = newsCountTextBox.Text;
+            int amount = 0;
+            int.TryParse(amountText, out amount);
+            Console.WriteLine(amount);
+            // Scrape.
+            string moodleUrl = "https://www.znu.edu.ua/cms/index.php?action=news/view&site_id=27&lang=ukr&start=&category_id=497&ordering=weight%20ASC%2Cdate%20DESC&keywords=&tags=&year=&day=&month=&";
+            MoodleScrapper scrapper = new MoodleScrapper(moodleUrl);
+
+            List<MoodleLink> links = scrapper.GetNews(amount);
+            StringBuilder stringBuilder = new StringBuilder();
+            links.ForEach(link => stringBuilder.Append(link.ToString()).Append("\n\n"));
+
+            // Render result.
+            StringToRichTextBox(stringBuilder.ToString(), ref contentTextBox);
+        }
+
         private void contentTextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
             if (!_isFileChanged)
@@ -285,10 +313,26 @@ namespace opi_lab2
             acceptButton.Visibility = Visibility.Collapsed;
         }
 
+        private void RenderGetNewsPanel()
+        {
+            GetNewsPanel.Visibility = Visibility.Visible;
+        }
+
+        private void HideGetNewsContent()
+        {
+            GetNewsPanel.Visibility = Visibility.Collapsed;
+        }
+
         private void HideNewContentTextBox()
         {
             contentTextBox.SetValue(Grid.ColumnSpanProperty, 2);
             newContentGrid.Visibility = Visibility.Hidden;
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
     }
